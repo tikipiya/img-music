@@ -14,6 +14,6 @@
 まだ行っていない場合は、以下のコマンドを実行してください。
 ```powershell
 go mod init img-music
-
+```
 ## あとがき
 input.pngとoutput.midはテスト時に使ったものです
