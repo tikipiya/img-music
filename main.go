@@ -61,7 +61,7 @@ func main() {
 		tr.Add(0, midi.NoteOn(0, pitch, velocity))
 		tr.Add(duration, midi.NoteOff(0, pitch))
 	}
-	tr.Add(0, smf.MetaEndOfTrack())
+	tr.Add(0, midi.Message{0xFF, 0x2F, 0x00})
 	s.Add(tr)
 	outPath := "output.mid"
 	err = s.WriteFile(outPath)
