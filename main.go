@@ -55,5 +55,17 @@ func main() {
 		avgSat := totalSaturation / float64(count)
 		pitch := uint8(36 + (avgLum/255.0)*60)
 		velocity := uint8(40 + (avgSat * 80))
+		duration := uint32(96)
+		tr.Add(0, midi.NoteOn(0, pitch, velocity))
+		tr.Add(duration, midi.NoteOff(0, pitch))
 	}
+	tr.Add(0, smf.MetaEndOfTrack())
+	s.Add(tr)
+	outPath := "output.mid"
+	err = s.WriteFile(outPath)
+	if err != nil {
+		fmt.Printf("MIDIの保存に失敗 : %v\n", err)
+		return
+	}
+	fmt.Printf("成功: %s を生成しました（画像サイズ : %dx%d）\n", outPath, width, height)
 }
